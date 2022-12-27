@@ -1,0 +1,5 @@
+---
+- dir: ./src
+  script: npm run build
+- dir: ./css
+  script: sass --update scss:.
