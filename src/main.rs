@@ -48,7 +48,7 @@ fn updated(job: &mut Job) -> bool {
 
 fn do_job(job: &mut Job) {
     if updated(job) {
-        println!("running: {}", &job.script);
+        println!("running: '{}'", &job.script);
         let out = Command::new("sh")
             .arg("-c")
             .arg(&job.script)
@@ -77,14 +77,6 @@ fn main() -> Result<()> {
 
     loop {
         thread::sleep(time::Duration::from_secs(args.delay));
-        for i in 0..jobs.len() {
-            do_job(&mut jobs[i]);
-        }
-
-        if false {
-            break;
-        }
+        (0..jobs.len()).for_each(|i| do_job(&mut jobs[i]));
     }
-
-    Ok(())
 }
