@@ -54,7 +54,12 @@ fn do_job(job: &mut Job) {
             .arg(&job.script)
             .output()
             .expect("failed to execute process");
-        println!("finished job: {:?}", out);
+        let stdout = String::from_utf8(out.stdout).unwrap();
+        let stderr = String::from_utf8(out.stderr).unwrap();
+        println!("STDOUT:\n{}", stdout);
+        if stderr != "" {
+            println!("STDERR:\n{}", stderr);
+        }
     }
 }
 
