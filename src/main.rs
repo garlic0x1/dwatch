@@ -60,7 +60,7 @@ fn do_job(job: &mut Job) {
 
 fn main() -> Result<()> {
     let args = Arguments::parse();
-    let jobs_config: Vec<JobConfig> = serde_json::from_str(&std::fs::read_to_string(args.file)?)?;
+    let jobs_config: Vec<JobConfig> = serde_yaml::from_str(&std::fs::read_to_string(args.file)?)?;
     let mut jobs: Vec<Job> = jobs_config
         .iter()
         .map(|config| Job {
