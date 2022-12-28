@@ -3,8 +3,7 @@ use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::path::Path;
 use std::process::{Child, Command};
-use std::{thread, time};
-use walkdir;
+use std::time;
 
 use crate::JobConfig;
 
@@ -23,8 +22,8 @@ impl Job {
         Self {
             dir: cfg.dir,
             filetypes: cfg.filetypes,
-            scripts: cfg.scripts.unwrap_or(vec![]),
-            servers: cfg.servers.unwrap_or(vec![]),
+            scripts: cfg.scripts.unwrap_or_default(),
+            servers: cfg.servers.unwrap_or_default(),
             delay: cfg.delay.unwrap_or(2),
             processes: HashMap::new(),
             history: HashMap::new(),
@@ -71,7 +70,7 @@ impl Job {
             let stderr = String::from_utf8(out.stderr).unwrap();
 
             println!("STDOUT:\n{}", stdout);
-            if stderr != "" {
+            if !stderr.is_empty() {
                 println!("STDERR:\n{}", stderr);
             }
         });
@@ -94,7 +93,7 @@ impl Job {
             .map(|file| -> Result<bool> {
                 let modified = file.metadata()?.modified()?;
                 let filename = file.path().to_str().unwrap_or(".").to_string();
-                if let Some(last) = self.history.insert(filename.clone(), modified) {
+                if let Some(last) = self.history.insert(filename, modified) {
                     Ok(last != modified)
                 } else {
                     Ok(true)
