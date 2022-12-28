@@ -37,7 +37,7 @@ impl Job {
                 self.run_scripts();
                 self.run_servers();
             }
-            thread::sleep(time::Duration::from_secs(self.delay));
+            tokio::time::sleep(time::Duration::from_secs(self.delay)).await;
         }
     }
 

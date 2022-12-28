@@ -4,10 +4,16 @@
   scripts:
     - npm run build
 
-# example scss to css usage
-- dir: .
+# example scss to css
+- dir: ./scss
   scripts:
     - sass --update scss:.
+
+# example backend restart
+- dir: ./src
+  filetypes: ["rs"]
+  servers: ["cargo run --port 5000"]
+  delay: 5
 
 # or use json:
 # [
