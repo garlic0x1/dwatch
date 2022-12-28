@@ -1,5 +1,19 @@
 ---
+# example react build
 - dir: ./src
-  script: npm run build
-- dir: ./css
-  script: sass --update scss:.
+  scripts:
+    - npm run build
+
+# example scss to css usage
+- dir: .
+  scripts:
+    - sass --update scss:.
+
+# or use json:
+# [
+#   {
+#     "dir": "./src",
+#     "filetypes": ["js", "jsx"],
+#     "scripts": ["npm run build"]
+#   }
+# ]
