@@ -10,6 +10,7 @@ use serde::Deserialize;
 #[clap(author, version, about, long_about = None)]
 #[clap(propagate_version = true)]
 struct Arguments {
+    /// Specify config file
     #[clap(default_value = ".dwatch", short, long)]
     file: String,
 }

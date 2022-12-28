@@ -33,9 +33,7 @@ impl Job {
 
     pub async fn watch(&mut self) {
         loop {
-            println!("checking");
             if self.updated() {
-                println!("changed");
                 self.run_scripts();
                 self.run_servers();
             }
@@ -62,7 +60,6 @@ impl Job {
     }
 
     fn run_scripts(&self) {
-        println!("{:?}", self.scripts);
         self.scripts.iter().for_each(|script| {
             println!("running: '{}'", script);
             let out = Command::new("sh")
