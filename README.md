@@ -4,6 +4,7 @@ dwatch looks for a `.dwatch` file by default but you can specify one with `dwatc
 
 # examples
 Command: ```dwatch```  
+
 Config: ```yaml
 ---
 # example react build
