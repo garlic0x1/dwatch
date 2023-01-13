@@ -35,6 +35,7 @@ impl Job {
             if self.updated() {
                 self.run_scripts();
                 self.run_servers();
+                println!("{:?}", self.processes);
             }
             tokio::time::sleep(time::Duration::from_secs(self.delay)).await;
         }
@@ -54,7 +55,8 @@ impl Job {
                 .spawn()
                 .expect("failed to spawn process");
 
-            self.processes.insert(server.clone(), child);
+            println!("{:?}", child);
+            self.processes.insert(server.into(), child);
         })
     }
 

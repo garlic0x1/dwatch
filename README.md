@@ -10,6 +10,12 @@ Config:
 #### **`example.dwatch`**
 ```yaml
 ---
+# example golang backend
+- dir: ./
+  filetypes: ["go"]
+  servers:
+    - go run . -p 8000
+
 # example react build
 - dir: ./src
   scripts:
@@ -23,7 +29,7 @@ Config:
 # example backend restart
 - dir: ./src
   filetypes: ["rs"]
-  servers: ["cargo run --port 5000"]
+  servers: ["cargo run -- --port 5000"]
   delay: 5
 
 # or use json:
