@@ -35,7 +35,6 @@ impl Job {
             if self.updated() {
                 self.run_scripts();
                 self.run_servers();
-                println!("{:?}", self.processes);
             }
             tokio::time::sleep(time::Duration::from_secs(self.delay)).await;
         }
@@ -44,7 +43,6 @@ impl Job {
     fn run_servers(&mut self) {
         self.servers.iter().for_each(|server| {
             if let Some(proc) = self.processes.get_mut(server) {
-                println!("killing: '{}'", server);
                 proc.kill().expect("failed to kill child");
             }
 
@@ -55,7 +53,6 @@ impl Job {
                 .spawn()
                 .expect("failed to spawn process");
 
-            println!("{:?}", child);
             self.processes.insert(server.into(), child);
         })
     }
