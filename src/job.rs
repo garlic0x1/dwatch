@@ -24,7 +24,7 @@ impl Job {
             filetypes: cfg.filetypes,
             scripts: cfg.scripts.unwrap_or_default(),
             servers: cfg.servers.unwrap_or_default(),
-            delay: cfg.delay.unwrap_or(2),
+            delay: cfg.delay.unwrap_or(1),
             processes: HashMap::new(),
             history: HashMap::new(),
         }
